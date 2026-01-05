@@ -95,6 +95,62 @@ export interface SiteConfig {
       error: string;
     };
   };
+  about: {
+    hero: {
+      title: string;
+      subtitle: string;
+      backgroundColor: string; // e.g., "bg-blue-700"
+    };
+    stats: {
+      enabled: boolean;
+      items: Array<{
+        value: string;
+        label: string;
+        color?: string; // e.g., "text-blue-600"
+      }>;
+    };
+    sections: Array<{
+      id: string;
+      type: "mission" | "vision" | "values" | "team" | "custom";
+      enabled: boolean;
+      layout?: "default" | "blue-card" | "split" | "grid";
+      heading: string;
+      content?: string;
+      items?: Array<{
+        title: string;
+        description: string;
+        icon?: string;
+      }>;
+    }>;
+    contact: {
+      enabled: boolean;
+      heading: string;
+      showEmail: boolean;
+      email: string;
+      showPhone: boolean;
+      phone: string;
+      showAddress: boolean;
+      address: string;
+    };
+    social: {
+      enabled: boolean;
+      heading: string;
+      links: {
+        twitter?: string;
+        linkedin?: string;
+        github?: string;
+        instagram?: string;
+        facebook?: string;
+      };
+    };
+    cta: {
+      enabled: boolean;
+      heading: string;
+      description: string;
+      buttonText: string;
+      buttonLink: string;
+    };
+  };
 }
 
 import logo from "@/assets/logo.png";
@@ -117,7 +173,7 @@ export const siteConfig: SiteConfig = {
     navLinks: [
       {
         label: "About Us",
-        href: "#about",
+        href: "/about",
       },
       {
         label: "Contact Us",
@@ -346,6 +402,119 @@ export const siteConfig: SiteConfig = {
     messages: {
       success: "✓ Thank you! Your message has been sent successfully.",
       error: "✗ Oops! Something went wrong. Please try again.",
+    },
+  },
+  about: {
+    hero: {
+      title: "About Us",
+      subtitle: "Neuradyne helps businesses imagine their future and make it real with AI, technology and people.",
+      backgroundColor: "bg-blue-700",
+    },
+    stats: {
+      enabled: true,
+      items: [
+        {
+          value: "€22.1B",
+          label: "2024 revenue",
+          color: "text-blue-600",
+        },
+        {
+          value: "420K",
+          label: "people",
+          color: "text-blue-600",
+        },
+        {
+          value: "50+",
+          label: "countries",
+          color: "text-blue-600",
+        },
+      ],
+    },
+    sections: [
+      {
+        id: "mission",
+        type: "mission",
+        enabled: true,
+        layout: "split",
+        heading: "Our Mission",
+        content:
+          "At Neuradyne, we are dedicated to transforming ideas into prototype and production-ready software solutions. Our commitment to excellence and innovation drives everything we do, and we strive to accelerate ideas into impactful, scalable business solutions that empower our clients to succeed in an ever-evolving digital landscape.",
+      },
+      {
+        id: "vision",
+        type: "vision",
+        enabled: true,
+        layout: "blue-card",
+        heading: "Our Vision",
+        content:
+          "We envision a future where cutting-edge AI technology meets practical business needs, creating solutions that not only solve today's challenges but anticipate tomorrow's opportunities. Through our AI System, we aim to be the catalyst that transforms visionary ideas into tangible results.",
+      },
+      {
+        id: "values",
+        type: "values",
+        enabled: true,
+        layout: "grid",
+        heading: "Our Core Values",
+        items: [
+          {
+            title: "Innovation",
+            description:
+              "We embrace creativity and forward-thinking solutions, constantly pushing the boundaries of what's possible with AI and software development.",
+          },
+          {
+            title: "Excellence",
+            description:
+              "We pursue the highest standards in everything we do, from code quality to customer service, ensuring exceptional results for our clients.",
+          },
+          {
+            title: "Integrity",
+            description:
+              "We operate with honesty, transparency, and ethical principles, building trust through our actions and commitments.",
+          },
+          {
+            title: "Collaboration",
+            description:
+              "We believe in the power of teamwork and partnership, working closely with our clients to understand their needs and deliver tailored solutions.",
+          },
+        ],
+      },
+      {
+        id: "custom-section",
+        type: "custom",
+        enabled: false,
+        layout: "default",
+        heading: "Custom Section",
+        content:
+          "Add any custom content here. You can enable/disable this section as needed.",
+      },
+    ],
+    contact: {
+      enabled: true,
+      heading: "Get In Touch",
+      showEmail: true,
+      email: "contact@neuradyne.com",
+      showPhone: true,
+      phone: "+91 234 567 8900",
+      showAddress: true,
+      address: "Bhubaneswar, Odisha, India",
+    },
+    social: {
+      enabled: true,
+      heading: "Connect With Us",
+      links: {
+        twitter: "#twitter",
+        linkedin: "#linkedin",
+        github: "#github",
+        instagram: "#instagram",
+      },
+    },
+    cta: {
+      enabled: true,
+      heading: "Ready to get started?",
+      description:
+        "Let's discuss how we can help accelerate your ideas into impact.",
+      buttonText: "Contact Us",
+      buttonLink: "/contact",
     },
   },
 };
