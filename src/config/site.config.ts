@@ -38,8 +38,6 @@ export interface SiteConfig {
       title: string;
       content: string;
       readMoreLink: string;
-      cardTitle?: string;
-      cardDescription?: string;
     }>;
   };
   blog: {
@@ -73,6 +71,8 @@ import logoCelestial from "@/assets/logo-celestial.png";
 import logoPulse from "@/assets/logo-pulse.png";
 import logoApex from "@/assets/logo-apex.png";
 import serviceImage from "@/assets/pexels-pixabay-158826.jpg";
+import mcpimage from "@/assets/mcp.jpg";
+import questionimage from "@/assets/question.jpg";
 
 export const siteConfig: SiteConfig = {
   header: {
@@ -90,10 +90,10 @@ export const siteConfig: SiteConfig = {
     ],
   },
   hero: {
-    slogan: "Neuradyne AI System Accelerating ideas into impact",
+    slogan: "Neuradyne AI Where Intelligence Takes Shapes",
     headerContent:
       "At Neuradyne, we transform ideas into prototype and production-ready software to Scalable Business Solutions.",
-    headerImage: logo,
+    headerImage: productImage,
     headerImageAlt: "Header Image",
   },
   services: {
@@ -108,12 +108,14 @@ export const siteConfig: SiteConfig = {
       },
       {
         title: "AI Question Generation",
+        image: questionimage,
         content:
           "Description of AI Question Generation service. Explain how this AI-powered feature works and its advantages.",
         viewWorkLink: "#ai-question",
       },
       {
         title: "Service #3",
+        image: mcpimage,
         content:
           "Description of Service #3. Provide information about this service and its key features.",
         viewWorkLink: "#service-3",
@@ -159,27 +161,18 @@ export const siteConfig: SiteConfig = {
         content:
           "Description of the first activity. Share details about what this activity involves and its impact.",
         readMoreLink: "#activity-1",
-        cardTitle: "Damn good card",
-        cardDescription:
-          "A card that showcases a set of tools that you use to create your product.",
       },
       {
         title: "Activity Title 2",
         content:
           "Description of the second activity. Explain the purpose and outcomes of this initiative.",
         readMoreLink: "#activity-2",
-        cardTitle: "Smart Integration",
-        cardDescription:
-          "Seamlessly integrate multiple platforms and services into one powerful solution.",
       },
       {
         title: "Activity Title 3",
         content:
           "Description of the third activity. Provide information about this activity and its significance.",
         readMoreLink: "#activity-3",
-        cardTitle: "AI Powered",
-        cardDescription:
-          "Leverage cutting-edge AI technology to automate and optimize your workflow.",
       },
     ],
   },

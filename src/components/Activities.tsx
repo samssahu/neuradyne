@@ -1,9 +1,16 @@
 "use client";
 
+import Image from "next/image";
 import { siteConfig } from "@/config/site.config";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ImageIcon, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useEffect } from "react";
-import { ActivityCard } from "./ActivityCard";
+
+interface Activity {
+  title: string;
+  content: string;
+  readMoreLink: string;
+  imageSrc?: string;
+}
 
 export const Activities = () => {
   const { activities } = siteConfig;
@@ -42,9 +49,56 @@ export const Activities = () => {
   const canGoPrev = currentIndex > 0;
   const canGoNext = currentIndex < maxIndex;
 
+  const ActivityCard = ({ activity }: { activity: Activity }) => (
+    <div className="border border-[#F1F1F1] rounded-lg overflow-hidden shadow-sm h-full flex flex-col">
+      <div className="w-full h-48 bg-gray-100 flex items-center justify-center overflow-hidden">
+        {activity.imageSrc ? (
+          <Image
+            src={activity.imageSrc}
+            alt={activity.title}
+            width={400}
+            height={192}
+            className="w-full h-full object-cover"
+          />
+        ) : (
+          <ImageIcon className="h-16 w-16 text-gray-400" />
+        )}
+      </div>
+
+      <div className="p-6 flex flex-col bg-gray-200 flex-grow">
+        <h3 className="text-xl font-bold mb-4">{activity.title}</h3>
+
+        <p className="text-[#666] mb-6 flex-grow">{activity.content}</p>
+
+        <a
+          href={activity.readMoreLink}
+          className="inline-flex items-center gap-2 text-black font-medium hover:underline"
+        >
+          <span>Read More</span>
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="inline-block"
+          >
+            <path
+              d="M6 3L11 8L6 13"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </a>
+      </div>
+    </div>
+  );
+
   if (!isMounted) {
     return (
-      <section className="py-24  bg-[radial-gradient(ellipse_200%100%_at_bottom_left,#7DD3FC,_#F0F9FF_100%)]">
+      <section className="py-24 bg-[radial-gradient(ellipse_200%100%_at_bottom_left,#7DD3FC,_#F0F9FD_100%)]">
         <div className="container">
           <h2 className="text-2xl md:text-3xl font-bold text-center mb-8">
             {activities.title}
@@ -54,12 +108,8 @@ export const Activities = () => {
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {activities.items.map((activity, index: number) => (
-              <ActivityCard
-                key={index}
-                title={activity.cardTitle || activity.title}
-                description={activity.cardDescription || activity.content}
-              />
+            {activities.items.map((activity: Activity, index: number) => (
+              <ActivityCard key={index} activity={activity} />
             ))}
           </div>
         </div>
@@ -68,7 +118,7 @@ export const Activities = () => {
   }
 
   return (
-    <section className="py-24 bg-[#eaedfe]">
+    <section className="py-24 bg-[radial-gradient(ellipse_200%100%_at_bottom_left,#7DD3FC,_#F0F9FD_100%)]">
       <div className="container">
         <h2 className="text-2xl md:text-3xl font-bold text-center mb-8">
           {activities.title}
@@ -113,16 +163,13 @@ export const Activities = () => {
                   transform: `translateX(-${(currentIndex * 100) / itemsPerView}%)`,
                 }}
               >
-                {activities.items.map((activity, index: number) => (
+                {activities.items.map((activity: Activity, index: number) => (
                   <div
                     key={index}
                     className="flex-shrink-0 px-4"
                     style={{ width: `${100 / itemsPerView}%` }}
                   >
-                    <ActivityCard
-                      title={activity.cardTitle || activity.title}
-                      description={activity.cardDescription || activity.content}
-                    />
+                    <ActivityCard activity={activity} />
                   </div>
                 ))}
               </div>
@@ -145,12 +192,8 @@ export const Activities = () => {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {activities.items.map((activity, index: number) => (
-              <ActivityCard
-                key={index}
-                title={activity.cardTitle || activity.title}
-                description={activity.cardDescription || activity.content}
-              />
+            {activities.items.map((activity: Activity, index: number) => (
+              <ActivityCard key={index} activity={activity} />
             ))}
           </div>
         )}
