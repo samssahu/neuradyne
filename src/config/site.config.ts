@@ -90,7 +90,7 @@ export const siteConfig: SiteConfig = {
     ],
   },
   hero: {
-    slogan: "Neuradyne AI Where Intelligence Takes Shapes",
+    slogan: "Neuradyne AI System Accelerating ideas into impact",
     headerContent:
       "At Neuradyne, we transform ideas into prototype and production-ready software to Scalable Business Solutions.",
     headerImage: logo,
