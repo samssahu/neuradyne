@@ -4,12 +4,13 @@ import Image, { StaticImageData } from "next/image";
 import { siteConfig } from "@/config/site.config";
 import { ImageIcon, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
-interface Service  {
-  title : string;
-  image? : StaticImageData;
-  content : string;
-  viewWorkLink : string;
+interface Service {
+  title: string;
+  image?: StaticImageData;
+  content: string;
+  viewWorkLink: string;
 }
 
 interface ServiceCardProps {
@@ -24,7 +25,7 @@ export const Services = () => {
 
   useEffect(() => {
     setIsMounted(true);
-    
+
     const handleResize = () => {
       if (window.innerWidth < 768) {
         setItemsPerView(1);
@@ -42,20 +43,28 @@ export const Services = () => {
   const showCarousel = totalItems > 3;
   const maxIndex = Math.max(0, totalItems - itemsPerView);
 
-  const handlePrev = () => {
-    setCurrentIndex((prev) => Math.max(0, prev - 1));
-  };
-
-  const handleNext = () => {
+  const handlePrev = () => setCurrentIndex((prev) => Math.max(0, prev - 1));
+  const handleNext = () =>
     setCurrentIndex((prev) => Math.min(maxIndex, prev + 1));
-  };
 
   const canGoPrev = currentIndex > 0;
   const canGoNext = currentIndex < maxIndex;
 
-  const ServiceCard = ({ service } : ServiceCardProps) => (
-    <div className="border border-[#F1F1F1] rounded-lg overflow-hidden shadow-sm h-full flex flex-col">
-      <div className="w-full h-48 bg-gray-100 flex items-center justify-center overflow-hidden">
+  const ServiceCard = ({ service }: ServiceCardProps) => (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
+      whileHover={{ y: -6 }}
+      className="
+        border rounded-lg overflow-hidden h-full flex flex-col
+        bg-white dark:bg-gray-900
+        border-[#F1F1F1] dark:border-gray-800
+        shadow-sm hover:shadow-lg dark:hover:shadow-black/40
+        transition-all
+      "
+    >
+      <div className="w-full h-48 bg-gray-100 dark:bg-gray-800 flex items-center justify-center overflow-hidden">
         {service.image ? (
           <Image
             src={service.image}
@@ -65,18 +74,26 @@ export const Services = () => {
             className="w-full h-full object-cover"
           />
         ) : (
-          <ImageIcon className="h-16 w-16 text-gray-400" />
+          <ImageIcon className="h-16 w-16 text-gray-400 dark:text-gray-500" />
         )}
       </div>
 
       <div className="p-6 flex flex-col flex-grow">
-        <h3 className="text-xl font-bold mb-4">{service.title}</h3>
+        <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
+          {service.title}
+        </h3>
 
-        <p className="text-[#666] mb-6 flex-grow">{service.content}</p>
+        <p className="text-gray-600 dark:text-gray-300 mb-6 flex-grow">
+          {service.content}
+        </p>
 
         <a
           href={service.viewWorkLink}
-          className="inline-flex items-center gap-2 text-black font-medium hover:underline"
+          className="
+            inline-flex items-center gap-2 font-medium
+            text-gray-900 dark:text-white
+            hover:underline
+          "
         >
           <span>view work</span>
           <svg
@@ -85,7 +102,6 @@ export const Services = () => {
             viewBox="0 0 16 16"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className="inline-block"
           >
             <path
               d="M3.33334 8H12.6667M12.6667 8L8 3.33333M12.6667 8L8 12.6667"
@@ -97,31 +113,13 @@ export const Services = () => {
           </svg>
         </a>
       </div>
-    </div>
+    </motion.div>
   );
 
-  if (!isMounted) {
-    return (
-      <section className="py-24 bg-white">
-        <div className="container">
-          <h2 className="text-2xl md:text-3xl font-bold text-center mb-8">
-            {services.title}
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {services.items.map((service, index) => (
-              <ServiceCard key={index} service={service} />
-            ))}
-          </div>
-        </div>
-      </section>
-    );
-  }
-
   return (
-    <section className="py-24 bg-white">
+    <section className="py-24 bg-white dark:bg-black">
       <div className="container">
-        <h2 className="text-2xl md:text-3xl font-bold text-center mb-8">
+        <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 text-gray-900 dark:text-white">
           {services.title}
         </h2>
 
@@ -131,24 +129,31 @@ export const Services = () => {
               <button
                 onClick={handlePrev}
                 disabled={!canGoPrev}
-                className={`p-2 rounded-full border border-[#F1F1F1] transition-colors ${
-                  canGoPrev
-                    ? "hover:bg-gray-100 text-black"
-                    : "text-gray-300 cursor-not-allowed"
-                }`}
-                aria-label="Previous"
+                className={`
+                  p-2 rounded-full border transition-colors
+                  border-[#F1F1F1] dark:border-gray-800
+                  ${
+                    canGoPrev
+                      ? "hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-900 dark:text-white"
+                      : "text-gray-400 cursor-not-allowed"
+                  }
+                `}
               >
                 <ChevronLeft className="h-5 w-5" />
               </button>
+
               <button
                 onClick={handleNext}
                 disabled={!canGoNext}
-                className={`p-2 rounded-full border border-[#F1F1F1] transition-colors ${
-                  canGoNext
-                    ? "hover:bg-gray-100 text-black"
-                    : "text-gray-300 cursor-not-allowed"
-                }`}
-                aria-label="Next"
+                className={`
+                  p-2 rounded-full border transition-colors
+                  border-[#F1F1F1] dark:border-gray-800
+                  ${
+                    canGoNext
+                      ? "hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-900 dark:text-white"
+                      : "text-gray-400 cursor-not-allowed"
+                  }
+                `}
               >
                 <ChevronRight className="h-5 w-5" />
               </button>
@@ -158,7 +163,9 @@ export const Services = () => {
               <div
                 className="flex transition-transform duration-300 ease-in-out"
                 style={{
-                  transform: `translateX(-${(currentIndex * 100) / itemsPerView}%)`,
+                  transform: `translateX(-${
+                    (currentIndex * 100) / itemsPerView
+                  }%)`,
                 }}
               >
                 {services.items.map((service, index) => (
@@ -180,10 +187,9 @@ export const Services = () => {
                   onClick={() => setCurrentIndex(index)}
                   className={`h-2 rounded-full transition-all ${
                     index === currentIndex
-                      ? "w-8 bg-black"
-                      : "w-2 bg-gray-300"
+                      ? "w-8 bg-gray-900 dark:bg-white"
+                      : "w-2 bg-gray-300 dark:bg-gray-700"
                   }`}
-                  aria-label={`Go to slide ${index + 1}`}
                 />
               ))}
             </div>

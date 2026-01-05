@@ -17,15 +17,26 @@ export const Hero = () => {
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
             <motion.h1
-              className="text-5xl md:text-7xl font-bold tracking-tighter bg-gradient-to-b from-black to-[#001E80] text-transparent bg-clip-text"
+              className="
+                text-5xl md:text-7xl font-bold tracking-tighter
+                bg-gradient-to-b
+                from-sky-900 to-blue-800
+                dark:from-white dark:to-blue-400
+                text-transparent bg-clip-text
+              "
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
             >
               {hero.slogan}
             </motion.h1>
+
             <motion.p
-              className="text-xl text-[#010D3E] tracking-tight mt-6"
+              className="
+                text-xl tracking-tight mt-6
+                text-sky-800
+                dark:text-gray-300
+              "
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
@@ -33,6 +44,7 @@ export const Hero = () => {
               {hero.headerContent}
             </motion.p>
           </motion.div>
+
           <motion.div
             className="mt-10 md:mt-0 md:w-1/2"
             initial={{ opacity: 0, scale: 0.8, x: 50 }}
@@ -40,9 +52,7 @@ export const Hero = () => {
             transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
           >
             <motion.div
-              animate={{
-                y: [0, -15, 0],
-              }}
+              animate={{ y: [0, -15, 0] }}
               transition={{
                 duration: 4,
                 repeat: Infinity,
@@ -61,20 +71,41 @@ export const Hero = () => {
             </motion.div>
           </motion.div>
         </div>
+
         {/* Partners Section */}
-        <div className="mt-16 -mx-5 -ml-5 -mr-5 lg:-ml-20 lg:-mr-20 px-5 lg:px-20 py-12 bg-gradient-to-b from-transparent via-blue-50 to-white">
+        <div
+          className="
+            mt-16 -mx-5 lg:-mx-20 px-5 lg:px-20 py-12
+            bg-gradient-to-b
+            from-transparent
+            via-sky-100
+            to-white
+            dark:via-gray-900
+            dark:to-black
+          "
+        >
           <div className="text-center mb-8">
-            <h2 className="text-2xl md:text-3xl text-gray-600 font-bold">{partners.title}</h2>
+            <h2
+              className="
+                text-2xl md:text-3xl font-bold
+                text-gray-600
+                dark:text-gray-400
+              "
+            >
+              {partners.title}
+            </h2>
           </div>
+
           <div
             className="flex overflow-hidden"
-            style={{ maskImage: "linear-gradient(to right, transparent, black, transparent)" }}
+            style={{
+              maskImage:
+                "linear-gradient(to right, transparent, black, transparent)",
+            }}
           >
             <motion.div
               className="flex gap-14 flex-none pr-14"
-              animate={{
-                translateX: "-50%",
-              }}
+              animate={{ translateX: "-50%" }}
               transition={{
                 duration: 20,
                 repeat: Infinity,
@@ -83,10 +114,32 @@ export const Hero = () => {
               }}
             >
               {partners.logos.map((logo, index) => (
-                <Image key={index} src={logo.src} alt={logo.alt} className="logo-ticker-image" />
+                <Image
+                  key={index}
+                  src={logo.src}
+                  alt={logo.alt}
+                  className="
+                    logo-ticker-image
+                    dark:invert
+                    dark:brightness-125
+                    dark:contrast-125
+                    dark:drop-shadow-[0_0_6px_rgba(255,255,255,0.25)]
+                  "
+                />
               ))}
               {partners.logos.map((logo, index) => (
-                <Image key={`duplicate-${index}`} src={logo.src} alt={logo.alt} className="logo-ticker-image" />
+                <Image
+                  key={`duplicate-${index}`}
+                  src={logo.src}
+                  alt={logo.alt}
+                  className="
+                    logo-ticker-image
+                    dark:invert
+                    dark:brightness-125
+                    dark:contrast-125
+                    dark:drop-shadow-[0_0_6px_rgba(255,255,255,0.25)]
+                  "
+                />
               ))}
             </motion.div>
           </div>
@@ -95,4 +148,3 @@ export const Hero = () => {
     </section>
   );
 };
-

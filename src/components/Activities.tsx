@@ -4,6 +4,7 @@ import Image from "next/image";
 import { siteConfig } from "@/config/site.config";
 import { ImageIcon, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
 interface Activity {
   title: string;
@@ -20,7 +21,7 @@ export const Activities = () => {
 
   useEffect(() => {
     setIsMounted(true);
-    
+
     const handleResize = () => {
       if (window.innerWidth < 768) {
         setItemsPerView(1);
@@ -38,20 +39,28 @@ export const Activities = () => {
   const showCarousel = totalItems > 3;
   const maxIndex = Math.max(0, totalItems - itemsPerView);
 
-  const handlePrev = () => {
-    setCurrentIndex((prev) => Math.max(0, prev - 1));
-  };
-
-  const handleNext = () => {
+  const handlePrev = () => setCurrentIndex((prev) => Math.max(0, prev - 1));
+  const handleNext = () =>
     setCurrentIndex((prev) => Math.min(maxIndex, prev + 1));
-  };
 
   const canGoPrev = currentIndex > 0;
   const canGoNext = currentIndex < maxIndex;
 
   const ActivityCard = ({ activity }: { activity: Activity }) => (
-    <div className="border border-[#F1F1F1] rounded-lg overflow-hidden shadow-sm h-full flex flex-col">
-      <div className="w-full h-48 bg-gray-100 flex items-center justify-center overflow-hidden">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
+      whileHover={{ y: -6 }}
+      className="
+        border rounded-lg overflow-hidden h-full flex flex-col
+        bg-white dark:bg-gray-900
+        border-[#F1F1F1] dark:border-gray-800
+        shadow-sm hover:shadow-lg dark:hover:shadow-black/40
+        transition-all
+      "
+    >
+      <div className="w-full h-48 bg-gray-100 dark:bg-gray-800 flex items-center justify-center overflow-hidden">
         {activity.imageSrc ? (
           <Image
             src={activity.imageSrc}
@@ -61,18 +70,26 @@ export const Activities = () => {
             className="w-full h-full object-cover"
           />
         ) : (
-          <ImageIcon className="h-16 w-16 text-gray-400" />
+          <ImageIcon className="h-16 w-16 text-gray-400 dark:text-gray-500" />
         )}
       </div>
 
-      <div className="p-6 flex flex-col bg-gray-200 flex-grow">
-        <h3 className="text-xl font-bold mb-4">{activity.title}</h3>
+      <div className="p-6 flex flex-col flex-grow bg-gray-50 dark:bg-gray-900">
+        <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
+          {activity.title}
+        </h3>
 
-        <p className="text-[#666] mb-6 flex-grow">{activity.content}</p>
+        <p className="text-gray-600 dark:text-gray-300 mb-6 flex-grow">
+          {activity.content}
+        </p>
 
         <a
           href={activity.readMoreLink}
-          className="inline-flex items-center gap-2 text-black font-medium hover:underline"
+          className="
+            inline-flex items-center gap-2 font-medium
+            text-gray-900 dark:text-white
+            hover:underline
+          "
         >
           <span>Read More</span>
           <svg
@@ -81,7 +98,6 @@ export const Activities = () => {
             viewBox="0 0 16 16"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className="inline-block"
           >
             <path
               d="M6 3L11 8L6 13"
@@ -93,37 +109,23 @@ export const Activities = () => {
           </svg>
         </a>
       </div>
-    </div>
+    </motion.div>
   );
 
-  if (!isMounted) {
-    return (
-      <section className="py-24 bg-[radial-gradient(ellipse_200%100%_at_bottom_left,#7DD3FC,_#F0F9FD_100%)]">
-        <div className="container">
-          <h2 className="text-2xl md:text-3xl font-bold text-center mb-8">
-            {activities.title}
-          </h2>
-          <p className="text-[#666] mb-10 max-w-2xl mx-auto text-center">
-            {activities.introContent}
-          </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {activities.items.map((activity: Activity, index: number) => (
-              <ActivityCard key={index} activity={activity} />
-            ))}
-          </div>
-        </div>
-      </section>
-    );
-  }
-
   return (
-    <section className="py-24 bg-[radial-gradient(ellipse_200%100%_at_bottom_left,#7DD3FC,_#F0F9FD_100%)]">
+    <section
+      className="
+        py-24
+        bg-[radial-gradient(ellipse_200%100%_at_bottom_left,#7DD3FC,_#F0F9FD_100%)]
+        dark:bg-[radial-gradient(ellipse_200%100%_at_bottom_left,#020617,_#000000_100%)]
+      "
+    >
       <div className="container">
-        <h2 className="text-2xl md:text-3xl font-bold text-center mb-8">
+        <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 text-gray-900 dark:text-white">
           {activities.title}
         </h2>
-        <p className="text-[#666] mb-10 max-w-2xl mx-auto text-center">
+
+        <p className="text-gray-600 dark:text-gray-400 mb-10 max-w-2xl mx-auto text-center">
           {activities.introContent}
         </p>
 
@@ -133,24 +135,31 @@ export const Activities = () => {
               <button
                 onClick={handlePrev}
                 disabled={!canGoPrev}
-                className={`p-2 rounded-full border border-[#F1F1F1] transition-colors ${
-                  canGoPrev
-                    ? "hover:bg-gray-100 text-black"
-                    : "text-gray-300 cursor-not-allowed"
-                }`}
-                aria-label="Previous"
+                className={`
+                  p-2 rounded-full border transition-colors
+                  border-[#F1F1F1] dark:border-gray-800
+                  ${
+                    canGoPrev
+                      ? "hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-900 dark:text-white"
+                      : "text-gray-400 cursor-not-allowed"
+                  }
+                `}
               >
                 <ChevronLeft className="h-5 w-5" />
               </button>
+
               <button
                 onClick={handleNext}
                 disabled={!canGoNext}
-                className={`p-2 rounded-full border border-[#F1F1F1] transition-colors ${
-                  canGoNext
-                    ? "hover:bg-gray-100 text-black"
-                    : "text-gray-300 cursor-not-allowed"
-                }`}
-                aria-label="Next"
+                className={`
+                  p-2 rounded-full border transition-colors
+                  border-[#F1F1F1] dark:border-gray-800
+                  ${
+                    canGoNext
+                      ? "hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-900 dark:text-white"
+                      : "text-gray-400 cursor-not-allowed"
+                  }
+                `}
               >
                 <ChevronRight className="h-5 w-5" />
               </button>
@@ -160,7 +169,9 @@ export const Activities = () => {
               <div
                 className="flex transition-transform duration-300 ease-in-out"
                 style={{
-                  transform: `translateX(-${(currentIndex * 100) / itemsPerView}%)`,
+                  transform: `translateX(-${
+                    (currentIndex * 100) / itemsPerView
+                  }%)`,
                 }}
               >
                 {activities.items.map((activity: Activity, index: number) => (
@@ -182,10 +193,9 @@ export const Activities = () => {
                   onClick={() => setCurrentIndex(index)}
                   className={`h-2 rounded-full transition-all ${
                     index === currentIndex
-                      ? "w-8 bg-black"
-                      : "w-2 bg-gray-300"
+                      ? "w-8 bg-gray-900 dark:bg-white"
+                      : "w-2 bg-gray-300 dark:bg-gray-700"
                   }`}
-                  aria-label={`Go to slide ${index + 1}`}
                 />
               ))}
             </div>

@@ -22,9 +22,7 @@ export default function AboutPage() {
       {/* Hero Section */}
       <section className="py-12 px-4">
         <div className="container mx-auto max-w-6xl">
-          <h1 className={`text-3xl md:text-4xl font-bold mb-4 ${
-            isDark ? "text-white" : "text-gray-900"
-          }`}>
+          <h1 className={"text-4xl md:text-5xl font-bold tracking-tighter bg-gradient-to-b from-black to-[#001E80] dark:from-white dark:to-white text-transparent bg-clip-text mb-4"}>
             {about.hero.title}
           </h1>
           <p className={`text-base md:text-lg max-w-3xl leading-relaxed ${
