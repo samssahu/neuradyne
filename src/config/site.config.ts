@@ -38,6 +38,8 @@ export interface SiteConfig {
       title: string;
       content: string;
       readMoreLink: string;
+      cardTitle?: string;
+      cardDescription?: string;
     }>;
   };
   blog: {
@@ -62,6 +64,7 @@ export interface SiteConfig {
 }
 
 import logo from "@/assets/logo.png";
+import fullLogo from "@/assets/fulllogo.png";
 import productImage from "@/assets/product-image.png";
 import logoAcme from "@/assets/logo-acme.png";
 import logoQuantum from "@/assets/logo-quantum.png";
@@ -69,7 +72,7 @@ import logoEcho from "@/assets/logo-echo.png";
 import logoCelestial from "@/assets/logo-celestial.png";
 import logoPulse from "@/assets/logo-pulse.png";
 import logoApex from "@/assets/logo-apex.png";
-import serviceImage from "@/assets/pexels-pixabay-158826.jpg"
+import serviceImage from "@/assets/pexels-pixabay-158826.jpg";
 
 export const siteConfig: SiteConfig = {
   header: {
@@ -88,8 +91,9 @@ export const siteConfig: SiteConfig = {
   },
   hero: {
     slogan: "Neuradyne AI Where Intelligence Takes Shapes",
-    headerContent: "At Neuradyne, we transform ideas into prototype and production-ready software to Scalable Business Solutions.",
-    headerImage: productImage,
+    headerContent:
+      "At Neuradyne, we transform ideas into prototype and production-ready software to Scalable Business Solutions.",
+    headerImage: logo,
     headerImageAlt: "Header Image",
   },
   services: {
@@ -97,18 +101,21 @@ export const siteConfig: SiteConfig = {
     items: [
       {
         title: "BilionEye",
-        image : serviceImage,
-        content: "Description of BilionEye service. Add details about what this service offers and how it benefits users.",
+        image: serviceImage,
+        content:
+          "Description of BilionEye service. Add details about what this service offers and how it benefits users.",
         viewWorkLink: "#bilioneye",
       },
       {
         title: "AI Question Generation",
-        content: "Description of AI Question Generation service. Explain how this AI-powered feature works and its advantages.",
+        content:
+          "Description of AI Question Generation service. Explain how this AI-powered feature works and its advantages.",
         viewWorkLink: "#ai-question",
       },
       {
         title: "Service #3",
-        content: "Description of Service #3. Provide information about this service and its key features.",
+        content:
+          "Description of Service #3. Provide information about this service and its key features.",
         viewWorkLink: "#service-3",
       },
     ],
@@ -144,22 +151,35 @@ export const siteConfig: SiteConfig = {
   },
   activities: {
     title: "Activities",
-    introContent: "Discover our latest activities and updates. Stay informed about what we're working on and how we're making a difference.",
+    introContent:
+      "Discover our latest activities and updates. Stay informed about what we're working on and how we're making a difference.",
     items: [
       {
         title: "Activity Title 1",
-        content: "Description of the first activity. Share details about what this activity involves and its impact.",
+        content:
+          "Description of the first activity. Share details about what this activity involves and its impact.",
         readMoreLink: "#activity-1",
+        cardTitle: "Damn good card",
+        cardDescription:
+          "A card that showcases a set of tools that you use to create your product.",
       },
       {
         title: "Activity Title 2",
-        content: "Description of the second activity. Explain the purpose and outcomes of this initiative.",
+        content:
+          "Description of the second activity. Explain the purpose and outcomes of this initiative.",
         readMoreLink: "#activity-2",
+        cardTitle: "Smart Integration",
+        cardDescription:
+          "Seamlessly integrate multiple platforms and services into one powerful solution.",
       },
       {
         title: "Activity Title 3",
-        content: "Description of the third activity. Provide information about this activity and its significance.",
+        content:
+          "Description of the third activity. Provide information about this activity and its significance.",
         readMoreLink: "#activity-3",
+        cardTitle: "AI Powered",
+        cardDescription:
+          "Leverage cutting-edge AI technology to automate and optimize your workflow.",
       },
     ],
   },
@@ -189,7 +209,7 @@ export const siteConfig: SiteConfig = {
     ],
   },
   footer: {
-    logo: logo,
+    logo: fullLogo,
     logoAlt: "Company Logo",
     columns: [
       {
@@ -264,4 +284,3 @@ export const siteConfig: SiteConfig = {
     copyright: "© 2026 Neuradyne, Inc. All rights reserved.",
   },
 };
-
