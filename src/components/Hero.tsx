@@ -7,7 +7,7 @@ export const Hero = () => {
   const { hero, partners } = siteConfig;
 
   return (
-    <section className="min-h-screen flex items-center overflow-x-clip px-5 lg:px-20">
+    <section className="min-h-screen flex items-center overflow-x-clip px-5 pt-10 md:pt-2 lg:px-20">
       <div className="w-full">
         <div className="md:flex items-center gap-8">
           <motion.div
@@ -64,7 +64,7 @@ export const Hero = () => {
         {/* Partners Section */}
         <div className="mt-16 -mx-5 -ml-5 -mr-5 lg:-ml-20 lg:-mr-20 px-5 lg:px-20 py-12 bg-gradient-to-b from-transparent via-blue-50 to-white">
           <div className="text-center mb-8">
-            <h2 className="text-2xl md:text-3xl font-bold">{partners.title}</h2>
+            <h2 className="text-2xl md:text-3xl text-gray-600 font-bold">{partners.title}</h2>
           </div>
           <div
             className="flex overflow-hidden"

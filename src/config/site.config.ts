@@ -19,6 +19,7 @@ export interface SiteConfig {
     title: string;
     items: Array<{
       title: string;
+      image?: StaticImageData;
       content: string;
       viewWorkLink: string;
     }>;
@@ -68,6 +69,7 @@ import logoEcho from "@/assets/logo-echo.png";
 import logoCelestial from "@/assets/logo-celestial.png";
 import logoPulse from "@/assets/logo-pulse.png";
 import logoApex from "@/assets/logo-apex.png";
+import serviceImage from "@/assets/pexels-pixabay-158826.jpg"
 
 export const siteConfig: SiteConfig = {
   header: {
@@ -78,10 +80,10 @@ export const siteConfig: SiteConfig = {
         label: "About Us",
         href: "#about",
       },
-      {
-        label: "Contact Us",
-        href: "#contact",
-      },
+      // {
+      //   label: "Contact Us",
+      //   href: "#contact",
+      // },
     ],
   },
   hero: {
@@ -95,6 +97,7 @@ export const siteConfig: SiteConfig = {
     items: [
       {
         title: "BilionEye",
+        image : serviceImage,
         content: "Description of BilionEye service. Add details about what this service offers and how it benefits users.",
         viewWorkLink: "#bilioneye",
       },
@@ -182,10 +185,6 @@ export const siteConfig: SiteConfig = {
       {
         title: "Category 5",
         content: "Content for category 5. Add your blog post content here.",
-      },
-      {
-        title: "Category 6",
-        content: "Content for category 6. Add your blog post content here.",
       },
     ],
   },
