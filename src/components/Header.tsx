@@ -55,7 +55,9 @@ export const Header = () => {
               </nav>
 
               {/* Mobile Menu Button */}
-              <button
+              <div className="flex items-center justify-center gap-4 md:hidden">
+                 <ModeToggle />
+               <button
                 className="md:hidden flex flex-col gap-1.5 relative z-50"
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 aria-label="Toggle menu"
@@ -75,7 +77,9 @@ export const Header = () => {
                     isMenuOpen ? "-rotate-45 -translate-y-2" : ""
                   }`}
                 />
-              </button>
+              </button>  
+              </div>
+              
             </div>
 
             {/* Mobile Navigation */}
