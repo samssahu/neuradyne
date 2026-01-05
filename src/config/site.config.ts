@@ -59,6 +59,42 @@ export interface SiteConfig {
     }>;
     copyright: string;
   };
+  contact: {
+    title: string;
+    subtitle: string;
+    googleFormUrl: string;
+    fields: {
+      name: {
+        label: string;
+        placeholder: string;
+        entryId: string;
+      };
+      email: {
+        label: string;
+        placeholder: string;
+        entryId: string;
+      };
+      phone: {
+        label: string;
+        placeholder: string;
+        entryId: string;
+        optional: boolean;
+      };
+      content: {
+        label: string;
+        placeholder: string;
+        entryId: string;
+      };
+    };
+    submitButton: {
+      text: string;
+      sendingText: string;
+    };
+    messages: {
+      success: string;
+      error: string;
+    };
+  };
 }
 
 import logo from "@/assets/logo.png";
@@ -83,10 +119,10 @@ export const siteConfig: SiteConfig = {
         label: "About Us",
         href: "#about",
       },
-      // {
-      //   label: "Contact Us",
-      //   href: "#contact",
-      // },
+      {
+        label: "Contact Us",
+        href: "/contact",
+      },
     ],
   },
   hero: {
@@ -269,11 +305,47 @@ export const siteConfig: SiteConfig = {
           },
           {
             label: "Contact",
-            href: "#contact",
+            href: "/contact",
           },
         ],
       },
     ],
     copyright: "© 2026 Neuradyne, Inc. All rights reserved.",
+  },
+  contact: {
+    title: "Contact Us",
+    subtitle: "We'd love to hear from you. Send us a message!",
+    googleFormUrl: "https://docs.google.com/forms/u/0/d/e/1FAIpQLSdMrVMAVGimlFQ2ARpWtUM7NweEOUb7fOSrQx3k5oq_YuMZvw/formResponse",
+    fields: {
+      name: {
+        label: "Full Name",
+        placeholder: "Enter your full name",
+        entryId: "entry.1898121508",
+      },
+      email: {
+        label: "Email Address",
+        placeholder: "Enter your email address",
+        entryId: "entry.307888726",
+      },
+      phone: {
+        label: "Phone Number",
+        placeholder: "+91 234 567 8900",
+        entryId: "entry.583166673",
+        optional: true,
+      },
+      content: {
+        label: "Your Message/Content",
+        placeholder: "Tell us what's on your mind...",
+        entryId: "entry.809906268",
+      },
+    },
+    submitButton: {
+      text: "Send Message",
+      sendingText: "Sending...",
+    },
+    messages: {
+      success: "✓ Thank you! Your message has been sent successfully.",
+      error: "✗ Oops! Something went wrong. Please try again.",
+    },
   },
 };

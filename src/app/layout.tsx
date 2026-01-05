@@ -23,7 +23,7 @@ export default function RootLayout({
       <body
         className={twMerge(
           dmSans.className,
-          "antialiased bg-[radial-gradient(ellipse_200%100%_at_bottom_left,#7DD3FC,_#F0F9FF_100%)]"
+          "antialiased bg-[radial-gradient(ellipse_200%100%_at_bottom_left,#7DD3FC,_#F0F9FF_100%)] dark:bg-black/80"
         )}
       >
         <ThemeProvider
