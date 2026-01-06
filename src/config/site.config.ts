@@ -166,6 +166,8 @@ import logoApex from "@/assets/logo-apex.png";
 import serviceImage from "@/assets/pexels-pixabay-158826.jpg";
 import mcpimage from "@/assets/mcp.jpg";
 import questionimage from "@/assets/question.jpg";
+import ac2 from "@/assets/activity2.jpg";
+import ac3 from "@/assets/activity3.jpg";
 
 export const siteConfig: SiteConfig = {
   header: {
@@ -258,12 +260,14 @@ export const siteConfig: SiteConfig = {
       },
       {
         title: "Activity Title 2",
+        image: ac2,
         content:
           "Description of the second activity. Explain the purpose and outcomes of this initiative.",
         readMoreLink: "#activity-2",
       },
       {
         title: "Activity Title 3",
+        image: ac3,
         content:
           "Description of the third activity. Provide information about this activity and its significance.",
         readMoreLink: "#activity-3",
