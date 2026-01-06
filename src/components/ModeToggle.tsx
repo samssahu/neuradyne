@@ -2,6 +2,7 @@
 
 import { Moon, Sun } from "lucide-react"
 import { useTheme } from "next-themes"
+import { useEffect, useRef } from "react"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -12,7 +13,54 @@ import {
 } from "@/components/ui/dropdown-menu"
 
 export function ModeToggle() {
-  const { setTheme } = useTheme()
+  const { theme, setTheme } = useTheme()
+  const hasAutoSetTheme = useRef(false)
+
+  useEffect(() => {
+    if (hasAutoSetTheme.current) return
+    hasAutoSetTheme.current = true
+
+    console.log("[Theme] Initial theme:", theme)
+
+    if (theme && theme !== "system") {
+      console.log("[Theme] User preference already set, skipping auto theme")
+      return
+    }
+
+    try {
+      if ("AmbientLightSensor" in window) {
+        console.log("[Theme] Ambient Light Sensor is supported")
+
+        // @ts-ignore
+        const sensor = new AmbientLightSensor()
+
+        sensor.addEventListener("reading", () => {
+          const lux = sensor.illuminance
+          console.log(`[Theme] Ambient light reading: ${lux} lux`)
+
+          if (lux < 50) {
+            console.log("[Theme] Low light detected → switching to DARK theme")
+            setTheme("dark")
+          } else if (lux > 150) {
+            console.log("[Theme] Bright light detected → switching to LIGHT theme")
+            setTheme("light")
+          } else {
+            console.log("[Theme] Neutral light → keeping system preference")
+          }
+
+          sensor.stop()
+          console.log("[Theme] Ambient Light Sensor stopped (one-time use)")
+        })
+
+        sensor.start()
+        console.log("[Theme] Ambient Light Sensor started")
+      } else {
+        console.log("[Theme] Ambient Light Sensor NOT supported in this browser")
+      }
+    } catch (err) {
+      console.error("[Theme] Ambient Light Sensor error:", err)
+    }
+  }, [theme, setTheme])
 
   return (
     <DropdownMenu>
