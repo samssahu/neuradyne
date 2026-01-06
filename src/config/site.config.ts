@@ -37,6 +37,7 @@ export interface SiteConfig {
     items: Array<{
       title: string;
       content: string;
+      image? : StaticImageData;
       readMoreLink: string;
     }>;
   };
@@ -212,6 +213,7 @@ export const siteConfig: SiteConfig = {
           "Description of Service #3. Provide information about this service and its key features.",
         viewWorkLink: "#service-3",
       },
+      
     ],
   },
   partners: {
@@ -250,6 +252,7 @@ export const siteConfig: SiteConfig = {
     items: [
       {
         title: "Activity Title 1",
+        image : mcpimage,
         content:
           "Description of the first activity. Share details about what this activity involves and its impact.",
         readMoreLink: "#activity-1",
