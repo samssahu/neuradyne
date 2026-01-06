@@ -356,7 +356,7 @@ export const siteConfig: SiteConfig = {
         links: [
           {
             label: "About",
-            href: "#about",
+            href: "/about",
           },
           {
             label: "Careers",
@@ -374,7 +374,8 @@ export const siteConfig: SiteConfig = {
   contact: {
     title: "Contact Us",
     subtitle: "We'd love to hear from you. Send us a message!",
-    googleFormUrl: "https://docs.google.com/forms/u/0/d/e/1FAIpQLSdMrVMAVGimlFQ2ARpWtUM7NweEOUb7fOSrQx3k5oq_YuMZvw/formResponse",
+    googleFormUrl:
+      "https://docs.google.com/forms/u/0/d/e/1FAIpQLSdMrVMAVGimlFQ2ARpWtUM7NweEOUb7fOSrQx3k5oq_YuMZvw/formResponse",
     fields: {
       name: {
         label: "Full Name",
@@ -410,7 +411,8 @@ export const siteConfig: SiteConfig = {
   about: {
     hero: {
       title: "About Us",
-      subtitle: "Neuradyne helps businesses imagine their future and make it real with AI, technology and people.",
+      subtitle:
+        "Neuradyne helps businesses imagine their future and make it real with AI, technology and people.",
       backgroundColor: "bg-blue-700",
     },
     stats: {
