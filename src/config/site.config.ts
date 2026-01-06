@@ -428,7 +428,7 @@ export const siteConfig: SiteConfig = {
       enabled: true,
       items: [
         {
-          value: "€22.1B",
+          value: "₹22.1cr",
           label: "2024 revenue",
           color: "text-blue-600",
         },
