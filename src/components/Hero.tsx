@@ -2,12 +2,14 @@
 import Image from "next/image";
 import { siteConfig } from "@/config/site.config";
 import { motion } from "framer-motion";
+import { Spotlight } from "./ui/spotlight";
 
 export const Hero = () => {
   const { hero, partners } = siteConfig;
 
   return (
     <section className="min-h-screen flex items-center overflow-x-clip px-5 pt-10 md:pt-2 lg:px-20">
+      <Spotlight className="hidden dark:block"/>
       <div className="w-full">
         <div className="md:flex items-center gap-8">
           <motion.div
