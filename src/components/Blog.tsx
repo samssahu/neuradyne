@@ -1,114 +1,95 @@
 "use client";
-import { siteConfig } from "@/config/site.config";
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 
-const categoryColors = [
-  {
-    bg: "bg-slate-50/60 dark:bg-gray-900/60 backdrop-blur-xl",
-    text: "text-slate-900 dark:text-gray-100",
-    border: "border-slate-200/60 dark:border-gray-800/60",
-  },
-  {
-    bg: "bg-slate-100/50 dark:bg-gray-900/50 backdrop-blur-xl",
-    text: "text-slate-900 dark:text-gray-100",
-    border: "border-slate-200/70 dark:border-gray-800/70",
-  },
-  {
-    bg: "bg-slate-50/70 dark:bg-gray-900/70 backdrop-blur-xl",
-    text: "text-slate-800 dark:text-gray-200",
-    border: "border-slate-300/60 dark:border-gray-700/60",
-  },
-  {
-    bg: "bg-slate-100/40 dark:bg-gray-900/40 backdrop-blur-xl",
-    text: "text-slate-800 dark:text-gray-200",
-    border: "border-slate-300/50 dark:border-gray-700/50",
-  },
-];
+import { siteConfig } from "@/config/site.config";
+import { useRef, useEffect } from "react";
+import { gsap } from "gsap";
 
 export const Blog = () => {
   const { blog } = siteConfig;
-  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
-
-  const toggleExpanded = (index: number) => {
-    setExpandedIndex(expandedIndex === index ? null : index);
-  };
 
   return (
     <section className="py-24 bg-white dark:bg-black">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white text-center mb-12">
+        <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white text-center mb-14">
           {blog.title}
         </h2>
 
-        <div className="flex flex-col gap-4 max-w-3xl mx-auto">
-          {blog.categories.map((category, index) => {
-            const colors = categoryColors[index % categoryColors.length];
-            const isExpanded = expandedIndex === index;
-
-            return (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.35, ease: "easeOut" }}
-                whileHover={{ y: -4 }}
-                className={`${colors.bg} border ${colors.border} rounded-2xl overflow-hidden shadow-sm hover:shadow-md dark:hover:shadow-black/40 transition-all`}
-              >
-                <button
-                  onClick={() => toggleExpanded(index)}
-                  className="w-full px-6 py-5 flex items-center justify-between text-left"
-                >
-                  <span
-                    className={`${colors.text} font-semibold text-lg`}
-                  >
-                    {category.title}
-                  </span>
-
-                  <motion.svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    className={colors.text}
-                    animate={{ rotate: isExpanded ? 45 : 0 }}
-                    transition={{ type: "spring", stiffness: 200, damping: 20 }}
-                  >
-                    <path
-                      d="M12 5V19M5 12H19"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </motion.svg>
-                </button>
-
-                <AnimatePresence>
-                  {isExpanded && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3, ease: "easeInOut" }}
-                      className="overflow-hidden"
-                    >
-                      <div className="px-6 pb-5 pt-0">
-                        <p
-                          className={`${colors.text} opacity-80 leading-relaxed`}
-                        >
-                          {category.content}
-                        </p>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.div>
-            );
-          })}
+        <div className="max-w-6xl mx-auto flex flex-col divide-y divide-slate-200 dark:divide-gray-800">
+          {blog.categories.map((category, index) => (
+            <FlowingBlogItem
+              key={index}
+              title={category.title}
+              content={category.content}
+              isFirst={index === 0}
+            />
+          ))}
         </div>
       </div>
     </section>
   );
 };
+
+/* -------------------------------------------------------------------------- */
+
+const FlowingBlogItem = ({
+  title,
+  content,
+  isFirst,
+}: {
+  title: string;
+  content: string;
+  isFirst: boolean;
+}) => {
+  const itemRef = useRef<HTMLDivElement>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!overlayRef.current) return;
+    gsap.set(overlayRef.current, { y: "101%" });
+  }, []);
+
+  const animateIn = () => {
+    gsap.to(overlayRef.current, {
+      y: "0%",
+      duration: 0.6,
+      ease: "expo.out",
+    });
+  };
+
+  const animateOut = () => {
+    gsap.to(overlayRef.current, {
+      y: "101%",
+      duration: 0.6,
+      ease: "expo.in",
+    });
+  };
+
+  return (
+    <div
+      ref={itemRef}
+      onMouseEnter={animateIn}
+      onMouseLeave={animateOut}
+      className={`relative overflow-hidden ${
+        isFirst ? "" : "border-t"
+      } border-slate-200 dark:border-gray-800`}
+    >
+      {/* Base row */}
+      <div className="h-[88px] flex items-center px-6 md:px-10 cursor-pointer">
+        <h3 className="text-xl md:text-2xl font-semibold uppercase tracking-wide text-slate-900 dark:text-white">
+          {title}
+        </h3>
+      </div>
+
+      {/* Hover panel */}
+      <div
+        ref={overlayRef}
+        className="absolute inset-0 bg-slate-900 dark:bg-gray-100 text-white dark:text-slate-900 flex items-center justify-center px-6 md:px-12"
+      >
+        <p className="max-w-4xl text-center text-base md:text-lg leading-relaxed opacity-90">
+          {content}
+        </p>
+      </div>
+    </div>
+  );
+};
+
