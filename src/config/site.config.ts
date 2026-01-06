@@ -37,7 +37,7 @@ export interface SiteConfig {
     items: Array<{
       title: string;
       content: string;
-      image? : StaticImageData;
+      image?: StaticImageData;
       readMoreLink: string;
     }>;
   };
@@ -213,7 +213,6 @@ export const siteConfig: SiteConfig = {
           "Description of Service #3. Provide information about this service and its key features.",
         viewWorkLink: "#service-3",
       },
-      
     ],
   },
   partners: {
@@ -252,7 +251,7 @@ export const siteConfig: SiteConfig = {
     items: [
       {
         title: "Activity Title 1",
-        image : mcpimage,
+        image: mcpimage,
         content:
           "Description of the first activity. Share details about what this activity involves and its impact.",
         readMoreLink: "#activity-1",
@@ -272,30 +271,36 @@ export const siteConfig: SiteConfig = {
     ],
   },
   blog: {
-    title: "Blog",
+    title: "Neuradyne AI Blog",
     categories: [
       {
-        title: "Category 1",
-        content: "Content for category 1. Add your blog post content here.",
+        title: "AI in the Real World",
+        content:
+          "At Neuradyne AI, we focus on building artificial intelligence that solves real problems, not just theoretical ones. From smart surveillance to intelligent automation, real-world AI requires robust data pipelines, edge-case handling, and scalable deployment. This blog explores how AI models move from research notebooks to production systems that create measurable impact.",
       },
       {
-        title: "Category 2",
-        content: "Content for category 2. Add your blog post content here.",
+        title: "Product Prototyping & MVP Development",
+        content:
+          "Turning an idea into a working prototype is one of the hardest steps in any startup journey. At Neuradyne AI, we specialize in rapid prototyping—building MVPs that validate ideas quickly using modern tech stacks, AI frameworks, and scalable architectures. Here we share lessons, tools, and strategies for transforming concepts into functional products.",
       },
       {
-        title: "Category 3",
-        content: "Content for category 3. Add your blog post content here.",
+        title: "Computer Vision & Smart Detection Systems",
+        content:
+          "Computer vision is reshaping how cities, industries, and organizations operate. Through projects like BillionEye, Neuradyne AI develops intelligent detection systems using models such as YOLO for potholes, accidents, and environmental hazards. This section covers vision model selection, optimization, deduplication logic, and real-time deployment challenges.",
       },
       {
-        title: "Category 4",
-        content: "Content for category 4. Add your blog post content here.",
+        title: "NLP, Automation & Intelligent Knowledge Systems",
+        content:
+          "Natural Language Processing enables machines to understand, generate, and reason over human language. From syllabus-to-question generation systems to intelligent document assistants, Neuradyne AI applies NLP to automate knowledge workflows. In this blog, we break down NLP pipelines, embeddings, retrieval systems, and practical automation use cases.",
       },
       {
-        title: "Category 5",
-        content: "Content for category 5. Add your blog post content here.",
+        title: "Building Scalable Software & AI Architecture",
+        content:
+          "A great idea fails without strong architecture. Neuradyne AI designs software systems that are scalable, maintainable, and production-ready. This category focuses on backend design, API architecture, databases, cloud deployment, and AI system integration—ensuring that innovation survives real-world scale and complexity.",
       },
     ],
   },
+
   footer: {
     logo: fullLogo,
     logoAlt: "Company Logo",
