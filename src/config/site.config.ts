@@ -160,6 +160,7 @@ import logo from "@/assets/logo.png";
 import fullLogo from "@/assets/fulllogo.png";
 import productImage from "@/assets/product-image.png";
 import logoAcme from "@/assets/logo-acme.png";
+import iitb from "@/assets/rep-logo.png"
 import logoQuantum from "@/assets/logo-quantum.png";
 import logoEcho from "@/assets/logo-echo.png";
 import logoCelestial from "@/assets/logo-celestial.png";
@@ -251,6 +252,10 @@ export const siteConfig: SiteConfig = {
       {
         src: logoApex,
         alt: "Apex Logo",
+      },
+      {
+        src: iitb,
+        alt: "IITB Logo",
       },
     ],
   },
