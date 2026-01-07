@@ -60,7 +60,7 @@ export function CarouselPlugin() {
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious className="left-4 sm:left-3" />
+      <CarouselPrevious className="left-3 sm:left-5" />
       <CarouselNext className="right-4 sm:right-8" />
     </Carousel>
   )
