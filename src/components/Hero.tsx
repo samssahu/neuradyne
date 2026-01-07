@@ -20,7 +20,7 @@ export const Hero = () => {
           >
             <motion.h1
               className="
-                text-5xl md:text-7xl font-bold tracking-tighter
+                text-4xl md:text-6xl font-bold tracking-tighter
                 bg-gradient-to-b
                 from-sky-900 to-blue-800
                 dark:from-white dark:to-blue-400

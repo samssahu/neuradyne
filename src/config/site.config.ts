@@ -21,6 +21,8 @@ export interface SiteConfig {
       title: string;
       image?: StaticImageData;
       content: string;
+      // Optional description of tech stack used for this service
+      techStack?: string;
       viewWorkLink: string;
     }>;
   };
@@ -192,28 +194,34 @@ export const siteConfig: SiteConfig = {
     headerImageAlt: "Header Image",
   },
   services: {
-    title: "Services",
+    title: "Products/Services",
     items: [
       {
-        title: "BilionEye",
+        title: "OMNI VISION",
         image: serviceImage,
         content:
-          "Description of BilionEye service. Add details about what this service offers and how it benefits users.",
-        viewWorkLink: "#bilioneye",
+          "Infrastructure and crowd monitoring is fragmented and reactive. OMNI VISION helps operators detect anomalies, congestion, and safety risks early using AI-powered video analytics.",
+        techStack:
+          "YOLO-based vision models, Python, FastAPI, Kafka, cloud-native microservices, React dashboards.",
+        viewWorkLink: "https://neuradyne.in/omni-vision",
       },
       {
         title: "AI Question Generation",
         image: questionimage,
         content:
-          "Description of AI Question Generation service. Explain how this AI-powered feature works and its advantages.",
-        viewWorkLink: "#ai-question",
+          "Institutions struggle to generate high-quality, diverse questions at scale. Our AI Question Generation engine turns source material into assessments tailored by difficulty and topic.",
+        techStack:
+          "Large language models, Python, LangChain, vector databases, Next.js frontends, cloud orchestration.",
+        viewWorkLink: "https://neuradyne.in/ai-question-generation",
       },
       {
-        title: "Service #3",
+        title: "MCP",
         image: mcpimage,
         content:
-          "Description of Service #3. Provide information about this service and its key features.",
-        viewWorkLink: "#service-3",
+          "Many teams have ideas for AI products but lack end-to-end execution. Our MVP & Product Engineering service takes you from idea to deployable product quickly and safely.",
+        techStack:
+          "TypeScript, Next.js, Node.js, PostgreSQL, modern MLOps tooling, CI/CD pipelines.",
+        viewWorkLink: "https://neuradyne.in/mvp-product-engineering",
       },
     ],
   },
